@@ -5,6 +5,13 @@ exports.projectInfo = function(req, res) { 
 
   // query for the specific project and
   // call the following callback
+  models.Project
+    .find('projectID')
+    .exec(afterQuery); 
+
+    /*function displayPosts(err, blog_posts) {
+
+    }*/
 
   function afterQuery(err, projects) {
     if(err) console.log(err);
@@ -25,4 +32,14 @@ exports.deleteProject = function(req, res) {
 
   // find the project and remove it
   // YOU MUST send an OK response w/ res.send();
-}
+  models.Project
+    .find('projectID')
+    .remove(projectID)
+    .exec(deleteCallback);
+     
+
+     function deleteCallback(err,projects) {
+      if(err) {console.log(err);}
+      res.send(projects[0]);
+      }
+  }
